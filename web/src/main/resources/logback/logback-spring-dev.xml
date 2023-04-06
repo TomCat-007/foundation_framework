@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 定义log文件的目录 -->
+    <springProperty scope="context" name="LOG_HOME" source="logging.file.path" defaultValue=""/>
+    <!--<property name="LOG_HOME" value="${logging.path}"/>-->
+    <!-- 定义服务的名字 -->
+    <springProperty scope="context" name="SERVER_NAME" source="spring.application.name" defaultValue=""/>
+
+    <!--设置存储路径变量-->
+    <property name="BASE_LOG_PATH" value="${LOG_HOME}/${SERVER_NAME}"/>
+
+    <!--格式化输出：%d表示日期，%thread表示线程名，%level：级别显示1个字符宽度%msg：日志消息，%n是换行符，tid用于Skywalking的链路追踪，暂未使用到-->
+    <property name="PATTERN"
+              value="[${SERVER_NAME}][%tid][%d{yyyy-MM-dd HH:mm:ss.SSS}][%level][%thread][%logger :%line] %msg %n"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%blue([%tid][%d{yyyy-MM-dd HH:mm:ss.SSS}][%level][%thread][%logger :%line]) %cyan(%msg %n)"/>
+
+    <!--控制台输出appender，ConsoleAppender的作用是将日志输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <destination>192.168.92.130:5044</destination> //logstash ip和暴露的端口，logback就是通过这个地址把日志发送给logstash-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />-->
+    <!--    </appender>-->
+
+    <appender name="TRACE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${BASE_LOG_PATH}/trace.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${BASE_LOG_PATH}/trace/%d{yyyy-MM-dd}/trace.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>TRACE</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--DEBUG类型日志文件输出appender，RollingFileAppender的作用是滚动记录文件-->
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志名,指定输出的文件名 -->
+        <file>${BASE_LOG_PATH}/debug.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件滚动输出的文件名,日志时间发生更新，文件大小达到最大值均会移动上面file标签中的日志文件地址,可设置文件类型为zip,开启文件压缩,%i指的是当天第几份日志文件-->
+            <fileNamePattern>${BASE_LOG_PATH}/debug/%d{yyyy-MM-dd}/debug.%i.log.zip</fileNamePattern>
+            <!--文件大于10MB时，生成新的日志文件-->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- 日志保存7天 -->
+            <maxHistory>7</maxHistory>
+            <!--日志文件的上限20GB，会删除旧的日志-->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${BASE_LOG_PATH}/info.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${BASE_LOG_PATH}/info/%d{yyyy-MM-dd}/info.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${BASE_LOG_PATH}/warn.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${BASE_LOG_PATH}/warn/%d{yyyy-MM-dd}/warn.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${BASE_LOG_PATH}/error.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${BASE_LOG_PATH}/error/%d{yyyy-MM-dd}/error.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="TRACE_FILE"/>
+        <appender-ref ref="DEBUG_FILE"/>
+        <appender-ref ref="INFO_FILE"/>
+        <appender-ref ref="WARN_FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </root>
+    <!--特定包/类的日志级别-->
+    <logger name="org.mybatis" level="DEBUG"/>
+    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="java.sql.Connection" level="INFO"/>
+    <logger name="java.sql.ResultSet" level="INFO"/>
+    <logger name="java.sql.PreparedStatement" level="INFO"/>
+    <logger name="org.apache.http" level="INFO"/>
+    <logger name="org.apache.catalina" level="INFO"/>
+    <logger name="org.apache.skywalking" level="INFO"/>
+    <logger name="org.redisson" level="INFO"/>
+</configuration>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.mapper.ResourceMapper">
+
+    <select id="findByRoleIds" resultType="com.example.web.pojo.Resource">
+        SELECT r.id,
+        r.name,
+        r.sign,
+        r.path,
+        r.type,
+        r.require_auth requireAuth,
+        r.props,
+        r.remark,
+        r.create_time createTime,
+        r.update_time updateTime
+        FROM sys_resource r,
+        sys_role_element_union reu,
+        sys_element e
+        WHERE r.id = e.resource_id
+        AND e.id = reu.element_id
+        <if test="roleIds != null and roleIds.size > 0">
+            AND reu.role_id IN
+            <foreach collection="roleIds" item="id" index="idx" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+        AND r.is_deleted = 0
+        AND e.is_deleted = 0
+    </select>
+</mapper>
+

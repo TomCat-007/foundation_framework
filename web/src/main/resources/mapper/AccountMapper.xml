@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.mapper.AccountMapper">
+
+    <select id="findByIdentityId" parameterType="long"
+            resultType="com.example.web.pojo.Account">
+        SELECT a.id,
+               a.tenant_id    tenantId,
+               a.account_code accountCode,
+               a.create_time  createTime
+        FROM sys_account a,
+             sys_identity_account_union au
+        WHERE a.id = au.account_id
+          AND a.is_deleted = 0
+          AND au.identity_id = #{identityId,jdbcType=BIGINT}
+    </select>
+
+</mapper>
+

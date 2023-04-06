@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.mapper.RoleMapper">
+
+    <select id="getAccountRoleByAccountIds" parameterType="collection"
+            resultType="com.example.web.api.response.system.vo.AccountRoleVo">
+        SELECT ru.account_id accountId,
+        r.id roleId,
+        r.`name`
+        FROM sys_role r
+        JOIN sys_account_role_union ru ON r.id = ru.role_id
+        WHERE r.is_deleted = 0
+        AND ru.is_deleted = 0
+        AND ru.account_id
+        IN
+        <foreach collection="accountIds" open="(" close=")" item="accountId" separator=",">
+            ${accountId}
+        </foreach>
+    </select>
+
+</mapper>
+

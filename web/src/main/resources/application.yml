@@ -1,0 +1,79 @@
+mapper:
+  check-example-entity-class: true
+  identity: MYSQL
+  mappers:
+    - common.config.mybatis.MyMapper
+  not-empty: true
+  safe-delete: true
+  safe-update: true
+  seq-format: true
+  style: camelhumpAndLowercase
+  wrap-keyword: '`{0}`'
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  row-bounds-with-count: true
+  offset-as-page-num: true
+
+mybatis:
+  mapper-locations:
+    #    - classpath:mapper/single/*.xml
+    #    - classpath:mapper/complex/*.xml
+    - classpath*:mapper/single/*.xml
+    - classpath*:mapper/complex/*.xml
+  type-aliases-package: com.example.common.model
+server:
+  tomcat:
+    basedir: tomcat
+  http2:
+    enabled: true
+  servlet:
+    session:
+      cookie:
+        name: security-cookie
+      tracking-modes:
+        - COOKIE
+spring:
+  profiles:
+    active: '@profileActive@'
+  datasource:
+    druid:
+      connectionProperties:
+        - druid.stat.mergeSql=true
+        - druid.stat.slowSqlMillis=5000
+      filters:
+        - stat
+        - wall
+        - slf4j
+      maxActive: 20
+      testOnReturn: false
+      validationQuery: SELECT 1 FROM dual
+  application:
+    name: foundation_framework
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  redis:
+    redisson:
+      file: "classpath:/redisson/redisson-@profileActive@.yaml"
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  session:
+    store-type: redis
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}

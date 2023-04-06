@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.mapper.DictionaryMapper">
+    <select id="selectLastByParentId" resultType="com.example.web.pojo.Dictionary">
+        SELECT id,
+               parent_id  parentId,
+               prev_id    prevId,
+               code,
+               label,
+               name,
+               type,
+               order_num  orderNum,
+               description,
+               is_enabled enable
+        FROM sys_dictionary
+        WHERE parent_id = #{parentId, jdbcType=BIGINT}
+        ORDER BY id DESC LIMIT 1;
+    </select>
+</mapper>
+
