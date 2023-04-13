@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 无属性响应类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @apiNote 该类用于没有属性返回时作为解除泛型语法的限制而用
  * @description 该类用于没有属性返回时作为解除泛型语法的限制而用
  * @date 2023/3/3 13:33

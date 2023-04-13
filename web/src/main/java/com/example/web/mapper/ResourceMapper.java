@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 资源表(Resource)表数据库访问层Mapper
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 资源表(Resource)表数据库访问层Mapper
  * @date 2023/3/3 13:33
  */

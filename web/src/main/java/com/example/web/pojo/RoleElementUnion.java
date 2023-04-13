@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 /**
  * 角色与页面元素关联表(RoleElementUnion)实体类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 角色与页面元素关联表(RoleElementUnion)实体类
  * @date 2023/3/3 13:33
  */

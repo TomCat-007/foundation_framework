@@ -3,7 +3,7 @@ package com.example.web.enums;
 /**
  * 短信发送状态
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 短信发送状态
  * @date 2023/3/3 13:33
  */

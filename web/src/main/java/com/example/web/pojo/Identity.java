@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 /**
  * 身份表(Identity)实体类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 身份表(Identity)实体类
  * @date 2023/3/3 13:33
  */

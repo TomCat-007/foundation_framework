@@ -3,7 +3,7 @@ package common.config.security.authority;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */

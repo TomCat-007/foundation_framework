@@ -28,7 +28,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description
  * @date 2023/3/3 13:33
  */

@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 分页请求类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @apiNote 该类作为一个缓冲，用于一些接口没有参数的情况下
  * @description 该类作为一个缓冲，用于一些接口没有参数的情况下
  * @date 2023/3/3 13:33

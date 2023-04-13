@@ -6,7 +6,7 @@ import com.example.web.pojo.Dictionary;
 /**
  * 字典表(Dictionary)表数据库访问层Mapper
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 字典表(Dictionary)表数据库访问层Mapper
  * @date 2023/3/3 13:33
  */

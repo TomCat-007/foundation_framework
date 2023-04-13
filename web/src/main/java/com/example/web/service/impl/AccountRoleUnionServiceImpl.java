@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * 账户与角色关联表(AccountRoleUnion)表服务实现类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 账户与角色关联表(AccountRoleUnion)表服务实现类
  * @date 2023/3/3 13:33
  */

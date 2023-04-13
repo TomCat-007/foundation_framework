@@ -6,7 +6,7 @@ import com.example.web.pojo.RoleElementUnion;
 /**
  * 角色与页面元素关联表(RoleElementUnion)表数据库访问层Mapper
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 角色与页面元素关联表(RoleElementUnion)表数据库访问层Mapper
  * @date 2023/3/3 13:33
  */

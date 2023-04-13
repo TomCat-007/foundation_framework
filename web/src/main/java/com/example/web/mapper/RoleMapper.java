@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 角色表(Role)表数据库访问层Mapper
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 角色表(Role)表数据库访问层Mapper
  * @date 2023/3/3 13:33
  */

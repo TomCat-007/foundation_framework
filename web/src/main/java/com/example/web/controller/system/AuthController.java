@@ -1,7 +1,7 @@
 package com.example.web.controller.system;
 
-import com.example.web.api.request.LoginRequest;
-import com.example.web.api.response.FormLoginResponse;
+import common.api.request.DefaultLoginRequest;
+import common.api.response.DefaultLoginResponse;
 import common.api.response.ImageCodeResponse;
 import common.config.api.base.BaseResponse;
 import common.config.api.base.Rest;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description
  * @date 2023/3/3 13:33
  */
@@ -30,7 +30,7 @@ public class AuthController {
 
     @ApiOperation(value = "表单登录", produces = "POST")
     @RequestMapping(value = SecurityConstants.LOGIN_PROCESSING_URL, method = RequestMethod.POST)
-    public Rest<FormLoginResponse> fakeLogin(@RequestBody LoginRequest request) {
+    public Rest<DefaultLoginResponse> fakeLogin(@RequestBody DefaultLoginRequest request) {
         throw new IllegalArgumentException("Add Spring Security to handle authentication");
     }
 

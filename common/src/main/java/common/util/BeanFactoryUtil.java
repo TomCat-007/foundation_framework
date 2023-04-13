@@ -8,7 +8,7 @@ import org.springframework.core.env.Environment;
 import java.util.Map;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 获取springboot中的bean工具
  * @date 2023/3/3 13:33
  */

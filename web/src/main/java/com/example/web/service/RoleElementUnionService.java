@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 角色与页面元素关联表(RoleElementUnion)表服务接口
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 角色与页面元素关联表(RoleElementUnion)表服务接口
  * @date 2023/3/3 13:33
  */

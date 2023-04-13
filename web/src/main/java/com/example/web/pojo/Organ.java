@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 机构表(Organ)实体类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 机构表(Organ)实体类
  * @date 2023/3/3 13:33
  */
