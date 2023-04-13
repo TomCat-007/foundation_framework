@@ -3,7 +3,7 @@ package common.config.api.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */

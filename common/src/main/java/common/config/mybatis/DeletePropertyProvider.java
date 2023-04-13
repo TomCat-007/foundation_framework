@@ -8,7 +8,7 @@ import tk.mybatis.mapper.mapperhelper.SqlHelper;
 import tk.mybatis.mapper.util.MetaObjectUtil;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */

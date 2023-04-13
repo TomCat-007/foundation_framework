@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 资源表(Resource)表服务接口
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 资源表(Resource)表服务接口
  * @date 2023/3/3 13:33
  */

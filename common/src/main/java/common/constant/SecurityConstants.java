@@ -1,11 +1,12 @@
 package common.constant;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description
  * @date 2023/3/3 13:33
  */
 public class SecurityConstants {
+    public static final String URL_IMAGE_CAPTCHA = "/auth/captcha/image";
 
     public static final String AUTH_CAPTCHA = "/auth/captcha/{uuid}";
 
@@ -22,7 +23,7 @@ public class SecurityConstants {
     public static final String MENU_TREE_PATH = "/system/menu/tree";
 
     public static final String[] NO_NEED_AUTH_URL = new String[]{
-            AUTH_CAPTCHA,
+            URL_IMAGE_CAPTCHA,
             AUTH_MOBILE_CAPTCHA,
     };
 

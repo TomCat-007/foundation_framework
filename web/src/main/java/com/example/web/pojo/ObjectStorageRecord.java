@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 /**
  * 对象存储记录(ObjectStorageRecord)实体类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 对象存储记录(ObjectStorageRecord)实体类
  * @date 2023/3/3 13:33
  */

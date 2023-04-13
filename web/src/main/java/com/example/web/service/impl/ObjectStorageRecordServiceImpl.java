@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * 对象存储记录(ObjectStorageRecord)表服务实现类
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 对象存储记录(ObjectStorageRecord)表服务实现类
  * @date 2023/3/3 13:33
  */

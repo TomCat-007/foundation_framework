@@ -162,4 +162,5 @@
     <logger name="org.apache.catalina" level="INFO"/>
     <logger name="org.apache.skywalking" level="INFO"/>
     <logger name="org.redisson" level="INFO"/>
+    <logger name="org.springframework.session.web.http.SessionRepositoryFilter" level="INFO"/>
 </configuration>

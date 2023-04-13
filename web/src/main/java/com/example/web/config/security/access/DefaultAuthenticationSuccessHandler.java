@@ -1,6 +1,6 @@
 package com.example.web.config.security.access;
 
-import com.example.web.api.response.FormLoginResponse;
+import common.api.response.DefaultLoginResponse;
 import com.example.web.config.security.userdetails.CustomUserDetails;
 import com.example.web.pojo.Account;
 import common.util.HttpContextUtil;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */
@@ -30,7 +30,7 @@ public class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        FormLoginResponse loginResponse = new FormLoginResponse();
+        DefaultLoginResponse loginResponse = new DefaultLoginResponse();
 
         Object principal = authentication.getPrincipal();
         if (principal instanceof CustomUserDetails) {

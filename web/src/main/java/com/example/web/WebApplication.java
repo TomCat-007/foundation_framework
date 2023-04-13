@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */

@@ -4,6 +4,8 @@ import common.config.api.base.BaseResponse;
 import common.config.api.base.Rest;
 import common.enums.error.AuthenticationErrorCodeEnum;
 import common.util.HttpContextUtil;
+import common.validate.code.enums.ValidateCodeErrorEnum;
+import common.validate.code.exception.ValidateCodeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */
@@ -48,6 +50,8 @@ public class DefaultAuthenticationFailureHandler implements AuthenticationFailur
             rest = Rest.error(AuthenticationErrorCodeEnum.ACCOUNT_LOCKED, "");
         } else if (exception instanceof AccountExpiredException) {
             rest = Rest.error(AuthenticationErrorCodeEnum.ACCOUNT_EXPIRED, "");
+        } else if (exception instanceof ValidateCodeException) {
+            rest = Rest.error(ValidateCodeErrorEnum.FAILURE, exception.getMessage()).setTip(exception.getMessage());
         }
         HttpContextUtil.write(response, rest);
     }

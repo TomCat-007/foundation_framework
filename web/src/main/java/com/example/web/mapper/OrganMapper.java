@@ -6,7 +6,7 @@ import common.config.mybatis.MyMapper;
 /**
  * 机构表(Organ)表数据库访问层Mapper
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 机构表(Organ)表数据库访问层Mapper
  * @date 2023/3/3 13:33
  */

@@ -7,7 +7,7 @@ import common.config.mybatis.MyMapper;
 /**
  * 对象存储记录(ObjectStorageRecord)表数据库访问层
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 对象存储记录(ObjectStorageRecord)表数据库访问层Mapper
  * @date 2023/3/3 13:33
  */

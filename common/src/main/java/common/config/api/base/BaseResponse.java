@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 公共响应类
  * @date 2023/3/3 13:33
  */

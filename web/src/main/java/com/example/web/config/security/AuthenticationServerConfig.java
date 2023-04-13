@@ -1,17 +1,21 @@
 package com.example.web.config.security;
 
-import common.config.security.authentication.DefaultAuthenticationEntryPoint;
-import common.config.security.authentication.DefaultAuthenticationFailureHandler;
 import com.example.web.config.security.access.DefaultAuthenticationSuccessHandler;
-import common.config.security.authentication.DefaultLogoutSuccessHandler;
+import com.example.web.config.security.access.expression.DefaultSecurityExpressionRoot;
 import common.config.api.base.BaseResponse;
 import common.config.api.base.Rest;
 import common.config.security.SecurityBeanConfig;
-import com.example.web.config.security.access.expression.DefaultSecurityExpressionRoot;
+import common.config.security.authentication.DefaultAuthenticationEntryPoint;
+import common.config.security.authentication.DefaultAuthenticationFailureHandler;
+import common.config.security.authentication.DefaultLogoutSuccessHandler;
 import common.config.security.authorization.DefaultAccessDeniedHandler;
 import common.constant.SecurityConstants;
 import common.enums.error.AuthenticationErrorCodeEnum;
 import common.util.HttpContextUtil;
+import common.validate.code.ValidateCodeRepository;
+import common.validate.code.authentication.ValidateCodeConfigurer;
+import common.validate.code.model.generator.image.ImageCodeGenerator;
+import common.validate.code.model.processor.DefaultValidateCodeProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -24,7 +28,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description
  * @date 2023/3/3 13:33
  */
@@ -38,6 +42,8 @@ public class AuthenticationServerConfig {
     private final CorsConfigurationSource corsConfigurationSource;
 
     private final DefaultSecurityExpressionRoot defaultSecurityExpressionRoot;
+
+    private final ValidateCodeRepository validateCodeRepository;
 
     @Bean
     WebSecurityCustomizer ignoringCustomizer() {
@@ -81,20 +87,20 @@ public class AuthenticationServerConfig {
                 .loginProcessingUrl(SecurityConstants.LOGIN_PROCESSING_URL)
                 .successHandler(new DefaultAuthenticationSuccessHandler())
                 .failureHandler(new DefaultAuthenticationFailureHandler());
+        // TODO: 2023/4/13 尝试接入短信登录(多种登录方式认证)
 //        http.authenticationProvider(new DaoAuthenticationProvider());
 
         // 验证码配置
-//        http.apply(new ValidateCodeConfigurer<>())
-//                .failureHandler(new DefaultAuthenticationFailureHandler())
-//                .validateCodeGenerator(SecurityConstants.URI.URL_IMAGE_CAPTCHA, new ImageCodeGenerator(validateCodeRepository).setExpireIn(60 * 3))
-//                // .validateCodeGenerator("/auth/captcha/mobile", new SmsCodeGenerator(validateCodeRepository).setNeedAuthenticated(true))
-//                .validateCodeProcessor(SecurityConstants.URI.URL_LOGIN_PROCESSING, new DefaultValidateCodeProcessor(validateCodeRepository))
-//                .and()
-//        ;
+        http.apply(new ValidateCodeConfigurer<>())
+                .failureHandler(new DefaultAuthenticationFailureHandler())
+                .validateCodeGenerator(SecurityConstants.URL_IMAGE_CAPTCHA, new ImageCodeGenerator(validateCodeRepository).setExpireIn(60 * 3))
+                // .validateCodeGenerator("/auth/captcha/mobile", new SmsCodeGenerator(validateCodeRepository).setNeedAuthenticated(true))
+                .validateCodeProcessor(SecurityConstants.LOGIN_PROCESSING_URL, new DefaultValidateCodeProcessor(validateCodeRepository))
+                .and();
 
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
             authorizationManagerRequestMatcherRegistry
-                    .antMatchers(SecurityConstants.AUTH_CAPTCHA)
+                    .antMatchers(SecurityConstants.URL_IMAGE_CAPTCHA)
                     .permitAll()
                     .anyRequest()
                     .access(defaultSecurityExpressionRoot);

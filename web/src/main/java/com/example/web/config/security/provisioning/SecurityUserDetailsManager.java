@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * An {@link AuthenticationProvider} implementation that retrieves user details from a
  * {@link UserDetailsService}.
  *
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description 类注释
  * @date 2023/3/3 13:33
  */
