@@ -1,4 +1,4 @@
-package com.example.web.api.response;
+package common.api.response;
 
 import common.config.api.base.BaseResponse;
 import io.swagger.annotations.ApiModel;
@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 import java.util.List;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description
  * @date 2023/3/3 13:33
  */
@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @ApiModel
 @Accessors(chain = true)
-public class FormLoginResponse extends BaseResponse {
+public class DefaultLoginResponse extends BaseResponse {
 
     @ApiModelProperty(value = "登录名")
     private String loginName;
@@ -31,8 +31,4 @@ public class FormLoginResponse extends BaseResponse {
 
     @ApiModelProperty(value = "当前登录账号拥有的账户列表")
     private List<Long> accountIds;
-
-    @ApiModelProperty(value = "是否关注公众号：1已关注，0未关注")
-    private Integer subscribe;
-
 }

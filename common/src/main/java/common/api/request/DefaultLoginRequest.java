@@ -1,4 +1,4 @@
-package com.example.web.api.request;
+package common.api.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,13 +7,13 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author zhanghuiyuan
+ * @author zhangguiyuan
  * @description
  * @date 2023/3/3 13:33
  */
 @Data
 @ApiModel
-public class LoginRequest implements Serializable {
+public class DefaultLoginRequest implements Serializable {
 //
 //    public static final String LOGIN_TYPE_PARAMETER = "authentication.loginType";
 //
@@ -29,9 +29,6 @@ public class LoginRequest implements Serializable {
 
     @ApiModelProperty(value = "密码（登录类型是 password 时必填）", example = "Xg0ZNh2ym2GVc9J9HuZQjoP3lbyklFfDsVmLR2cLN3yzhxYKy1rCYacEAUUNcIZe")
     private String password;
-
-//    @ApiModelProperty(value = "验证码", required = true, example = "vfj4")
-//    private String captcha;
 
     @ApiModelProperty(value = "登录类型（password：密码登录；sms：短信；agent：代理；social：社交登录）", required = true, example = "password")
     private String loginType;
