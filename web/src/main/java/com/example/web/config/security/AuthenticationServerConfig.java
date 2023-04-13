@@ -87,6 +87,7 @@ public class AuthenticationServerConfig {
                 .loginProcessingUrl(SecurityConstants.LOGIN_PROCESSING_URL)
                 .successHandler(new DefaultAuthenticationSuccessHandler())
                 .failureHandler(new DefaultAuthenticationFailureHandler());
+        // TODO: 2023/4/13 尝试接入短信登录(多种登录方式认证)
 //        http.authenticationProvider(new DaoAuthenticationProvider());
 
         // 验证码配置
