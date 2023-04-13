@@ -3,6 +3,9 @@ package common.config.security;
 import cn.hutool.core.util.StrUtil;
 import common.config.security.session.CompositeHttpSessionIdResolver;
 import common.config.security.session.URLHttpSessionIdResolver;
+import common.validate.code.ValidateCodeRepository;
+import common.validate.code.model.repository.RedissonValidateCodeRepository;
+import org.redisson.api.RedissonClient;
 import org.redisson.spring.session.RedissonSessionRepository;
 import org.redisson.spring.session.config.EnableRedissonHttpSession;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,5 +95,15 @@ public class SecurityBeanConfig {
         String name = StrUtil.trim(applicationName).replaceAll("-", ":").replaceAll("\\.", ":");
         String[] split = name.split(":");
         return split.length > 2 ? StrUtil.format("{}:{}", split[0], split[1]) : name;
+    }
+
+    @Bean
+    ValidateCodeRepository validateCodeRepository(RedissonClient redissonClient,
+                                                  @Value("${spring.application.name}") String applicationName) {
+        RedissonValidateCodeRepository redissonValidateCodeRepository = new RedissonValidateCodeRepository(redissonClient);
+        if (StrUtil.isNotBlank(applicationName)) {
+            redissonValidateCodeRepository.setKeyPrefix(buildKeyPrefix(applicationName) + ":captcha");
+        }
+        return redissonValidateCodeRepository;
     }
 }

@@ -2,6 +2,8 @@ package com.example.web.controller.system;
 
 import com.example.web.api.request.LoginRequest;
 import com.example.web.api.response.FormLoginResponse;
+import common.api.response.ImageCodeResponse;
+import common.config.api.base.BaseResponse;
 import common.config.api.base.Rest;
 import common.constant.SecurityConstants;
 import io.swagger.annotations.Api;
@@ -10,10 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zhanghuiyuan
@@ -35,18 +34,18 @@ public class AuthController {
         throw new IllegalArgumentException("Add Spring Security to handle authentication");
     }
 
-//    @GetMapping(SecurityConstants.URI.URL_AUTH_LOGOUT)
-//    @ApiOperation(value = "注销", notes = "注销", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public Rest<BaseResponse> fakeLogout() {
-//        throw new IllegalArgumentException("Add Spring Security to handle authentication");
-//    }
-//
-//    @GetMapping(SecurityConstants.URI.URL_IMAGE_CAPTCHA)
-//    @ApiOperation(value = "图片验证码", notes = "图片验证码", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public Rest<ImageCodeResponse> imageCaptcha() {
-//
-//        throw new IllegalArgumentException("Add Spring Security to handle image captcha");
-//    }
+    @GetMapping(SecurityConstants.AUTH_LOGOUT)
+    @ApiOperation(value = "注销", notes = "注销", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Rest<BaseResponse> fakeLogout() {
+        throw new IllegalArgumentException("Add Spring Security to handle authentication");
+    }
+
+    @GetMapping(SecurityConstants.URL_IMAGE_CAPTCHA)
+    @ApiOperation(value = "图片验证码", notes = "图片验证码", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Rest<ImageCodeResponse> imageCaptcha() {
+        throw new IllegalArgumentException("Add Spring Security to handle image captcha");
+    }
+
 //
 //    @GetMapping("/account/menu/tree")
 //    @ApiOperation(value = "登录菜单树", notes = "登录菜单树", produces = MediaType.APPLICATION_JSON_VALUE)

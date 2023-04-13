@@ -9,6 +9,7 @@ import cn.hutool.extra.servlet.ServletUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -79,7 +80,7 @@ public class HttpContextUtil {
         PrintWriter writer = null;
 
         try {
-            response.setContentType("application/json");
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding(StandardCharsets.UTF_8.name());
             writer = response.getWriter();
             writer.write(OBJECT_MAPPER.writeValueAsString(obj));
@@ -92,4 +93,20 @@ public class HttpContextUtil {
         }
 
     }
+
+//    public static void write(HttpServletRequest request, HttpServletResponse response, Object obj) {
+//        PrintWriter writer = null;
+//        try {
+//            ResponseUtil.allCors(request, response);
+//            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+//            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+//            writer = response.getWriter();
+//            writer.write(OBJECT_MAPPER.writeValueAsString(obj));
+//            writer.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            writer.close();
+//        }
+//    }
 }
