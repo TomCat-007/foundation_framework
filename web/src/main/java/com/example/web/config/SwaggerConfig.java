@@ -9,10 +9,7 @@ import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -22,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -56,13 +54,15 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.example.web.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                // .securityContexts(Arrays.asList(securityContext()))
-                // .securitySchemes(Arrays.asList(apiKey()));
+                 .securityContexts(Arrays.asList(securityContext()))
+                .securitySchemes(securitySchemes())
                 .extensions(openApiExtensionResolver.buildExtensions(groupName));
     }
 
-    private ApiKey apiKey() {
-        return new ApiKey("X-Auth-Token", "X-Auth-Token", "header");
+    private List<SecurityScheme> securitySchemes() {
+        LinkedList<SecurityScheme> securitySchemes = new LinkedList<>();
+        securitySchemes.add(new ApiKey("X-Auth-Token", "X-Auth-Token", "header"));
+        return securitySchemes;
     }
 
     private SecurityContext securityContext() {

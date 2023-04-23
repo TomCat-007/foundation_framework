@@ -1,8 +1,10 @@
 package common.config.mybatis;
 
 import tk.mybatis.mapper.additional.aggregation.AggregationMapper;
+import tk.mybatis.mapper.additional.delete.DeleteByPropertyMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.additional.insert.InsertListMapper;
+import tk.mybatis.mapper.additional.select.SelectByPropertyMapper;
 import tk.mybatis.mapper.additional.update.differ.UpdateByDifferMapper;
 import tk.mybatis.mapper.additional.update.force.UpdateByPrimaryKeySelectiveForceMapper;
 import tk.mybatis.mapper.common.IdsMapper;
