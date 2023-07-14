@@ -18,8 +18,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -54,13 +54,23 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.example.web.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                 .securityContexts(Arrays.asList(securityContext()))
+                .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(securitySchemes())
                 .extensions(openApiExtensionResolver.buildExtensions(groupName));
     }
 
+    /*  AfterScript 脚本
+    var code=ke.response.data.code;
+if(code=="00000"){
+    //获取token
+    var token=ke.response.headers["x-auth-token"];
+    //1、如何参数是Header，则设置当前逻辑分组下的全局Header
+     ke.global.setHeader("X-Auth-Token",token);
+}
+     */
+
     private List<SecurityScheme> securitySchemes() {
-        LinkedList<SecurityScheme> securitySchemes = new LinkedList<>();
+        List<SecurityScheme> securitySchemes = new ArrayList<>();
         securitySchemes.add(new ApiKey("X-Auth-Token", "X-Auth-Token", "header"));
         return securitySchemes;
     }
